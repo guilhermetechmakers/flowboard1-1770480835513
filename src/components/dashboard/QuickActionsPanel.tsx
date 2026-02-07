@@ -17,7 +17,7 @@ const defaultActions: QuickAction[] = [
     id: 'new-board',
     label: 'New Board',
     description: 'Start from scratch',
-    href: '/board/new',
+    href: '/board-visual-canvas',
     icon: LayoutGrid,
     variant: 'primary',
   },
@@ -63,7 +63,7 @@ export function QuickActionsPanel({
     >
       {actions.map((action) => (
         <Link key={action.id} to={action.href} className="group block">
-          <Card className="h-full cursor-pointer transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-primary">
+          <Card className="h-full cursor-pointer transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-primary hover:scale-[1.02]">
             <CardContent className="flex items-center gap-4 pt-6">
               <div
                 className={cn(

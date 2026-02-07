@@ -24,12 +24,12 @@ function getActivityIcon(type: ActivityItem['type']) {
 
 function ActivitySkeleton() {
   return (
-    <Card className="animate-pulse">
+    <Card className="border-0 shadow-card">
       <CardContent className="flex items-start gap-4 pt-4">
-        <div className="h-8 w-8 shrink-0 rounded-full bg-muted" />
+        <div className="h-8 w-8 shrink-0 rounded-full bg-muted animate-pulse" />
         <div className="flex-1 space-y-2">
-          <div className="h-4 w-full rounded bg-muted" />
-          <div className="h-3 w-1/4 rounded bg-muted" />
+          <div className="h-4 w-full rounded bg-muted animate-pulse" />
+          <div className="h-3 w-1/4 rounded bg-muted animate-pulse" />
         </div>
       </CardContent>
     </Card>
@@ -57,14 +57,14 @@ export function RecentActivityFeed({
     return (
       <div className={cn('space-y-4', className)}>
         <h2 className="text-h3 font-semibold">Recent Activity</h2>
-        <Card className="flex flex-col items-center justify-center py-12">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
-          <MessageSquare className="h-6 w-6 text-muted-foreground" />
-        </div>
-        <CardContent className="pt-4 text-center">
-          <p className="text-sm text-muted-foreground">{emptyMessage}</p>
-        </CardContent>
-      </Card>
+        <Card className="flex flex-col items-center justify-center py-12 border-dashed">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted mb-4">
+            <MessageSquare className="h-6 w-6 text-muted-foreground" />
+          </div>
+          <CardContent className="pt-0 text-center">
+            <p className="text-sm text-muted-foreground">{emptyMessage}</p>
+          </CardContent>
+        </Card>
       </div>
     )
   }
@@ -75,7 +75,7 @@ export function RecentActivityFeed({
       {items.map((item) => (
         <Card
           key={item.id}
-          className="transition-all duration-300 hover:border-primary/20 hover:shadow-card"
+          className="transition-all duration-300 hover:border-primary/20 hover:shadow-card-hover"
         >
           <CardContent className="flex items-start gap-4 pt-4">
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">

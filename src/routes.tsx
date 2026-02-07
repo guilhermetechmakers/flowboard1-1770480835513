@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'projects', element: <ProjectsPage /> },
-      { path: 'projects/new', element: <Navigate to="/board/new" replace /> },
+      { path: 'projects/new', element: <Navigate to="/board-visual-canvas" replace /> },
       { path: 'templates', element: <TemplatesPage /> },
       { path: 'settings', element: <SettingsPage /> },
       { path: 'users', element: <UsersPage /> },

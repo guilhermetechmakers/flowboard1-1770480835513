@@ -3,6 +3,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { Button } from '@/components/ui/button'
 import { LayoutGrid, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
+
+const BOARD_CANVAS_PATH = '/board-visual-canvas'
 import type { User } from '@/types'
 
 export interface ProjectWithMeta {
@@ -34,11 +36,11 @@ export interface ProjectGridListProps {
 
 function ProjectCardSkeleton() {
   return (
-    <Card className="overflow-hidden animate-pulse">
-      <div className="aspect-video bg-muted" />
+    <Card className="overflow-hidden border-0 shadow-card">
+      <div className="aspect-video bg-muted animate-pulse" />
       <CardHeader className="pb-2">
-        <div className="h-5 w-3/4 rounded bg-muted" />
-        <div className="mt-2 h-4 w-1/2 rounded bg-muted" />
+        <div className="h-5 w-3/4 rounded bg-muted animate-pulse" />
+        <div className="mt-2 h-4 w-1/2 rounded bg-muted animate-pulse" />
       </CardHeader>
     </Card>
   )
@@ -79,7 +81,7 @@ export function ProjectGridList({
           </div>
           <p className="text-muted-foreground text-center">{emptyMessage}</p>
           <Button asChild className="mt-4">
-            <Link to="/board/new">Create your first board</Link>
+            <Link to="/board-visual-canvas">Create your first board</Link>
           </Button>
         </Card>
       </div>
@@ -102,7 +104,11 @@ export function ProjectGridList({
         {projects.map((project) => (
           <Link
             key={project.id}
-            to={project.boardId ? `/board/${project.boardId}` : `/board/${project.id}`}
+            to={
+              project.boardId
+                ? `${BOARD_CANVAS_PATH}/${project.boardId}`
+                : `${BOARD_CANVAS_PATH}/${project.id}`
+            }
             className="group block"
           >
             <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-primary">

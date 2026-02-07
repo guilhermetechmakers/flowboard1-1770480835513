@@ -52,8 +52,8 @@ export function TopNavigation({ className, mobileMenuSlot }: TopNavigationProps)
             aria-label="Search projects"
           />
         </div>
-        <Link to="/board/new">
-          <Button size="sm" className="transition-all hover:scale-[1.02] active:scale-[0.98]">
+        <Link to="/board-visual-canvas">
+          <Button size="sm" className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-md">
             <Plus className="h-4 w-4 mr-2" aria-hidden />
             Create Project
           </Button>
