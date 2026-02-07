@@ -76,7 +76,7 @@ export interface LoginSignupPage {
   updated_at: string
 }
 
-export interface LoginSignupPage {
+export interface Dashboard {
   id: string
   user_id: string
   title: string
@@ -84,4 +84,26 @@ export interface LoginSignupPage {
   status: string
   created_at: string
   updated_at: string
+}
+
+export interface ActivityItem {
+  id: string
+  type: 'comment' | 'ai' | 'share'
+  text: string
+  time: string
+  metadata?: Record<string, unknown>
+}
+
+export interface ProjectWithMeta extends Project {
+  lastActivity: string
+  thumbnail?: string
+}
+
+export interface ProjectCardData {
+  id: string
+  name: string
+  thumbnail?: string
+  lastActivity: string
+  collaboratorsCount: number
+  boardId?: string
 }

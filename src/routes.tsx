@@ -6,7 +6,7 @@ import { SignupPage } from '@/pages/auth/signup'
 import { LoginSignupPage } from '@/pages/Login/SignupPage'
 import { PasswordResetPage } from '@/pages/auth/password-reset'
 import { VerifyEmailPage } from '@/pages/auth/verify-email'
-import { DashboardOverview } from '@/pages/dashboard/overview'
+import DashboardPage from '@/pages/Dashboard'
 import { ProjectsPage } from '@/pages/dashboard/projects'
 import { TemplatesPage } from '@/pages/dashboard/templates'
 import { SettingsPage } from '@/pages/dashboard/settings'
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     element: <DashboardLayout />,
     children: [
-      { index: true, element: <DashboardOverview /> },
+      { index: true, element: <DashboardPage /> },
       { path: 'projects', element: <ProjectsPage /> },
       { path: 'projects/new', element: <Navigate to="/board/new" replace /> },
       { path: 'templates', element: <TemplatesPage /> },

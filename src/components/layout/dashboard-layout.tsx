@@ -10,11 +10,9 @@ import {
   CreditCard,
   ChevronLeft,
   Menu,
-  Search,
-  Bell,
-  Plus,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { TopNavigation } from '@/components/dashboard/TopNavigation'
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
@@ -159,42 +157,19 @@ export function DashboardLayout() {
 
       {/* Main content */}
       <div className="flex flex-1 flex-col min-w-0">
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border bg-background px-4 shadow-sm">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setMobileOpen(true)}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-          <div className="flex flex-1 items-center gap-4">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="search"
-                placeholder="Search projects..."
-                className="h-10 w-full rounded-md border border-border bg-background pl-9 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
-            <Link to="/board/new">
-              <Button size="sm">
-                <Plus className="h-4 w-4 mr-2" />
-                New Board
-              </Button>
-            </Link>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon">
-              <Bell className="h-4 w-4" />
+        <TopNavigation
+          mobileMenuSlot={
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden shrink-0"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
             </Button>
-            <Link to="/dashboard/profile">
-              <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium">
-                U
-              </div>
-            </Link>
-          </div>
-        </header>
+          }
+        />
         <main className="flex-1 p-4 md:p-6 lg:p-8">
           <Outlet />
         </main>
