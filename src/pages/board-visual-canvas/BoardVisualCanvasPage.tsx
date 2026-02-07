@@ -9,8 +9,10 @@ import {
   CollaborationBar,
   BottomTimeline,
   CommentThreads,
+  BoardSearchFilter,
 } from '@/components/board-visual-canvas'
-import type { BoardNode, BoardEdge, NodeType, Viewport } from '@/types'
+import type { BoardNode, BoardEdge, NodeType, Viewport, SearchFilters } from '@/types'
+import { filterNodesClient } from '@/api/search'
 
 const NODE_TYPES: { type: NodeType; label: string }[] = [
   { type: 'text', label: 'Text' },
@@ -84,6 +86,24 @@ export default function BoardVisualCanvasPage() {
   const [comments, setComments] = useState<Record<string, import('@/types').CanvasComment[]>>({})
   const [historyIndex, setHistoryIndex] = useState(0)
   const historyRef = useRef<{ nodes: BoardNode[]; edges: BoardEdge[] }[]>([])
+  const [searchFilters, setSearchFilters] = useState<SearchFilters>({})
+
+  const hasActiveFilters =
+    !!searchFilters.query?.trim() ||
+    (searchFilters.types?.length ?? 0) > 0 ||
+    (searchFilters.tags?.length ?? 0) > 0 ||
+    !!searchFilters.assigneeId ||
+    !!searchFilters.dateFrom ||
+    !!searchFilters.dateTo
+
+  const displayedNodes = hasActiveFilters
+    ? filterNodesClient(nodes, searchFilters)
+    : nodes
+
+  const displayedNodeIds = new Set(displayedNodes.map((n) => n.id))
+  const displayedEdges = hasActiveFilters
+    ? edges.filter((e) => displayedNodeIds.has(e.source) && displayedNodeIds.has(e.target))
+    : edges
 
   const selectedNode = nodes.find((n) => n.id === selectedId)
 
@@ -213,7 +233,7 @@ export default function BoardVisualCanvasPage() {
     <div className="flex h-screen flex-col bg-background">
         <div className="flex flex-1 min-h-0">
           <div className="flex flex-1 flex-col min-w-0 relative">
-            <div className="absolute top-4 left-4 z-20">
+            <div className="absolute top-4 left-4 z-20 flex items-center gap-3">
               <Toolbar
                 tool={tool}
                 onToolChange={(t) => setTool(t)}
@@ -240,6 +260,14 @@ export default function BoardVisualCanvasPage() {
                 isNodeMenuOpen={isNodeMenuOpen}
                 onNodeMenuToggle={() => setIsNodeMenuOpen((o) => !o)}
               />
+              <BoardSearchFilter
+                nodes={nodes}
+                onFiltersChange={setSearchFilters}
+                onNodeSelect={(id) => {
+                  setSelectedId(id)
+                  setShowNodePanel(true)
+                }}
+              />
             </div>
 
             <div className="absolute top-4 right-4 z-20">
@@ -248,8 +276,8 @@ export default function BoardVisualCanvasPage() {
 
             <div className="flex-1 min-h-0 pt-16">
               <CanvasArea
-                nodes={nodes}
-                edges={edges}
+                nodes={displayedNodes}
+                edges={displayedEdges}
                 selectedId={selectedId}
                 onSelectNode={(id) => {
                   setSelectedId(id)

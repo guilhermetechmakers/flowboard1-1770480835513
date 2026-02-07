@@ -44,6 +44,25 @@ export interface BoardNode {
   width?: number
   height?: number
   metadata?: Record<string, unknown>
+  tags?: string[]
+  assigneeId?: string
+  createdAt?: string
+}
+
+export interface SearchFilters {
+  query?: string
+  types?: NodeType[]
+  tags?: string[]
+  assigneeId?: string
+  dateFrom?: string
+  dateTo?: string
+}
+
+export interface NodeSearchResult {
+  node: BoardNode
+  boardId: string
+  boardTitle?: string
+  matches?: string[]
 }
 
 export interface BoardEdge {

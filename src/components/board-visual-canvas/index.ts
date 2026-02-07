@@ -1,5 +1,6 @@
 export { Toolbar } from './Toolbar'
 export type { ToolbarProps, Tool } from './Toolbar'
+export { BoardSearchFilter } from './BoardSearchFilter'
 export { CanvasArea } from './CanvasArea'
 export type { CanvasAreaProps, Viewport } from './CanvasArea'
 export { NodeTypesPalette } from './NodeTypesPalette'

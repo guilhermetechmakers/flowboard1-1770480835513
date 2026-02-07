@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +8,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Search, Bell, Plus, User, Settings, LogOut } from 'lucide-react'
+import { Bell, Plus, User, Settings, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { OrganizationSwitcher } from './OrganizationSwitcher'
+import { DashboardSearchFilter } from './DashboardSearchFilter'
 import type { Organization } from '@/types'
 
 const DEFAULT_ORGS: Organization[] = [
@@ -27,8 +26,6 @@ export interface TopNavigationProps {
 }
 
 export function TopNavigation({ className, mobileMenuSlot }: TopNavigationProps) {
-  const [searchQuery, setSearchQuery] = useState('')
-
   return (
     <header
       className={cn(
@@ -38,20 +35,11 @@ export function TopNavigation({ className, mobileMenuSlot }: TopNavigationProps)
     >
       {mobileMenuSlot}
       <div className="flex flex-1 items-center gap-4">
-        <div className="relative flex-1 max-w-md">
-          <Search
-            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-            aria-hidden
-          />
-          <Input
-            type="search"
-            placeholder="Search projects..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 h-10 rounded-md border border-border bg-background focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label="Search projects"
-          />
-        </div>
+        <DashboardSearchFilter
+          scope="global"
+          placeholder="Search nodes, projects..."
+          className="flex-1"
+        />
         <Link to="/board-visual-canvas">
           <Button size="sm" className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-md">
             <Plus className="h-4 w-4 mr-2" aria-hidden />
