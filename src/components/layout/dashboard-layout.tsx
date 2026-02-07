@@ -1,5 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+
+const SIDEBAR_COLLAPSED_KEY = 'flowboard-sidebar-collapsed'
+
+function getInitialCollapsed(): boolean {
+  if (typeof window === 'undefined') return false
+  const stored = localStorage.getItem(SIDEBAR_COLLAPSED_KEY)
+  return stored === 'true'
+}
 import { Button } from '@/components/ui/button'
 import {
   LayoutGrid,
@@ -26,9 +34,13 @@ const bottomNavItems = [
 ]
 
 export function DashboardLayout() {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(getInitialCollapsed)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(collapsed))
+  }, [collapsed])
 
   return (
     <div className="flex min-h-screen bg-background">

@@ -24,9 +24,9 @@ function getActivityIcon(type: ActivityItem['type']) {
 
 function ActivitySkeleton() {
   return (
-    <Card className="border-0 shadow-card">
+    <Card className="border-0 shadow-card border border-border/60">
       <CardContent className="flex items-start gap-4 pt-4">
-        <div className="h-8 w-8 shrink-0 rounded-full bg-muted animate-pulse" />
+        <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-muted to-muted/60 animate-pulse" />
         <div className="flex-1 space-y-2">
           <div className="h-4 w-full rounded bg-muted animate-pulse" />
           <div className="h-3 w-1/4 rounded bg-muted animate-pulse" />
@@ -47,7 +47,13 @@ export function RecentActivityFeed({
       <div className={cn('space-y-4', className)}>
         <h2 className="text-h3 font-semibold">Recent Activity</h2>
         {[1, 2, 3].map((i) => (
-          <ActivitySkeleton key={i} />
+          <div
+            key={i}
+            className="animate-fade-in-up [animation-fill-mode:both]"
+            style={{ animationDelay: `${i * 70}ms` }}
+          >
+            <ActivitySkeleton />
+          </div>
         ))}
       </div>
     )
@@ -57,12 +63,12 @@ export function RecentActivityFeed({
     return (
       <div className={cn('space-y-4', className)}>
         <h2 className="text-h3 font-semibold">Recent Activity</h2>
-        <Card className="flex flex-col items-center justify-center py-12 border-dashed">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted mb-4">
-            <MessageSquare className="h-6 w-6 text-muted-foreground" />
+        <Card className="flex flex-col items-center justify-center py-12 border-dashed border-2 border-border/80 bg-gradient-to-b from-card to-card-muted/50">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4">
+            <MessageSquare className="h-6 w-6 text-primary" />
           </div>
           <CardContent className="pt-0 text-center">
-            <p className="text-sm text-muted-foreground">{emptyMessage}</p>
+            <p className="text-sm text-muted-foreground max-w-xs">{emptyMessage}</p>
           </CardContent>
         </Card>
       </div>
@@ -72,13 +78,14 @@ export function RecentActivityFeed({
   return (
     <div className={cn('space-y-4', className)}>
       <h2 className="text-h3 font-semibold">Recent Activity</h2>
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <Card
           key={item.id}
-          className="transition-all duration-300 hover:border-primary/20 hover:shadow-card-hover"
+          className="group transition-all duration-300 hover:border-primary/20 hover:shadow-card-hover hover:-translate-y-0.5 border-border/60 animate-fade-in-up [animation-fill-mode:both]"
+          style={{ animationDelay: `${Math.min(idx * 50, 150)}ms` }}
         >
           <CardContent className="flex items-start gap-4 pt-4">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-muted to-muted/80 group-hover:from-primary/10 group-hover:to-accent/10 transition-colors duration-300">
               {getActivityIcon(item.type)}
             </div>
             <div className="min-w-0 flex-1">

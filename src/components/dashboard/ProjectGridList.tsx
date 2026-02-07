@@ -36,8 +36,8 @@ export interface ProjectGridListProps {
 
 function ProjectCardSkeleton() {
   return (
-    <Card className="overflow-hidden border-0 shadow-card">
-      <div className="aspect-video bg-muted animate-pulse" />
+    <Card className="overflow-hidden border-0 shadow-card border border-border/60">
+      <div className="aspect-video bg-gradient-to-br from-muted to-muted/60 animate-pulse" />
       <CardHeader className="pb-2">
         <div className="h-5 w-3/4 rounded bg-muted animate-pulse" />
         <div className="mt-2 h-4 w-1/2 rounded bg-muted animate-pulse" />
@@ -64,7 +64,13 @@ export function ProjectGridList({
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <ProjectCardSkeleton key={i} />
+            <div
+              key={i}
+              className="animate-fade-in-up [animation-fill-mode:both]"
+              style={{ animationDelay: `${i * 80}ms` }}
+            >
+              <ProjectCardSkeleton />
+            </div>
           ))}
         </div>
       </div>
@@ -75,12 +81,12 @@ export function ProjectGridList({
     return (
       <div className={cn('space-y-4', className)}>
         <h2 className="text-h3 font-semibold">Recent Projects</h2>
-        <Card className="flex flex-col items-center justify-center py-16 px-6 border-dashed">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted mb-4">
-            <LayoutGrid className="h-8 w-8 text-muted-foreground" />
+        <Card className="flex flex-col items-center justify-center py-16 px-6 border-dashed border-2 border-border/80 bg-gradient-to-b from-card to-card-muted/50 transition-all duration-300 hover:border-primary/20">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4">
+            <LayoutGrid className="h-8 w-8 text-primary" />
           </div>
-          <p className="text-muted-foreground text-center">{emptyMessage}</p>
-          <Button asChild className="mt-4">
+          <p className="text-muted-foreground text-center max-w-sm">{emptyMessage}</p>
+          <Button asChild className="mt-4 transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
             <Link to="/board-visual-canvas">Create your first board</Link>
           </Button>
         </Card>
@@ -101,7 +107,7 @@ export function ProjectGridList({
         </Button>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
+        {projects.map((project, idx) => (
           <Link
             key={project.id}
             to={
@@ -109,10 +115,11 @@ export function ProjectGridList({
                 ? `${BOARD_CANVAS_PATH}/${project.boardId}`
                 : `${BOARD_CANVAS_PATH}/${project.id}`
             }
-            className="group block"
+            className="group block animate-fade-in-up [animation-fill-mode:both]"
+            style={{ animationDelay: `${Math.min(idx * 60, 200)}ms` }}
           >
-            <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-primary">
-              <div className="aspect-video bg-muted flex items-center justify-center relative overflow-hidden">
+            <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 hover:shadow-lg group-focus-visible:ring-2 group-focus-visible:ring-primary border-border/60">
+              <div className="aspect-video bg-gradient-to-br from-muted to-muted/80 flex items-center justify-center relative overflow-hidden">
                 {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
@@ -120,7 +127,9 @@ export function ProjectGridList({
                     className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <LayoutGrid className="h-12 w-12 text-muted-foreground" />
+                  <div className="rounded-xl bg-primary/5 p-4 group-hover:bg-primary/10 transition-colors duration-300">
+                    <LayoutGrid className="h-12 w-12 text-primary/60" />
+                  </div>
                 )}
               </div>
               <CardHeader className="pb-2">

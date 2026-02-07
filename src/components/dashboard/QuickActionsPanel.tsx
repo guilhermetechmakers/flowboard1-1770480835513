@@ -61,13 +61,18 @@ export function QuickActionsPanel({
         className
       )}
     >
-      {actions.map((action) => (
-        <Link key={action.id} to={action.href} className="group block">
-          <Card className="h-full cursor-pointer transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-primary hover:scale-[1.02]">
+      {actions.map((action, idx) => (
+        <Link
+          key={action.id}
+          to={action.href}
+          className="group block animate-fade-in-up [animation-fill-mode:both]"
+          style={{ animationDelay: `${idx * 80}ms` }}
+        >
+          <Card className="h-full cursor-pointer transition-all duration-300 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-primary hover:scale-[1.02] border-border/60">
             <CardContent className="flex items-center gap-4 pt-6">
               <div
                 className={cn(
-                  'flex h-12 w-12 shrink-0 items-center justify-center rounded-lg',
+                  'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110',
                   variantStyles[action.variant ?? 'primary']
                 )}
               >

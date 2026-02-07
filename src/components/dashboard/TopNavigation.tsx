@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,6 +13,7 @@ import { Bell, Plus, User, Settings, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { OrganizationSwitcher } from './OrganizationSwitcher'
 import { DashboardSearchFilter } from './DashboardSearchFilter'
+import { CreateProjectDialog } from './CreateProjectDialog'
 import type { Organization } from '@/types'
 
 const DEFAULT_ORGS: Organization[] = [
@@ -26,7 +28,10 @@ export interface TopNavigationProps {
 }
 
 export function TopNavigation({ className, mobileMenuSlot }: TopNavigationProps) {
+  const [createDialogOpen, setCreateDialogOpen] = useState(false)
+
   return (
+    <>
     <header
       className={cn(
         'sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border bg-background px-4 shadow-sm',
@@ -40,12 +45,14 @@ export function TopNavigation({ className, mobileMenuSlot }: TopNavigationProps)
           placeholder="Search nodes, projects..."
           className="flex-1"
         />
-        <Link to="/board-visual-canvas">
-          <Button size="sm" className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-md">
-            <Plus className="h-4 w-4 mr-2" aria-hidden />
-            Create Project
-          </Button>
-        </Link>
+        <Button
+          size="sm"
+          onClick={() => setCreateDialogOpen(true)}
+          className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-md"
+        >
+          <Plus className="h-4 w-4 mr-2" aria-hidden />
+          Create Project
+        </Button>
       </div>
 
       <div className="flex items-center gap-2">
@@ -97,5 +104,7 @@ export function TopNavigation({ className, mobileMenuSlot }: TopNavigationProps)
         </DropdownMenu>
       </div>
     </header>
+    <CreateProjectDialog open={createDialogOpen} onOpenChange={setCreateDialogOpen} />
+    </>
   )
 }

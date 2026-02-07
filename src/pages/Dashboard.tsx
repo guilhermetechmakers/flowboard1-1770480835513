@@ -31,17 +31,21 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      <div>
-        <h1 className="text-h2 font-semibold text-foreground">Dashboard</h1>
-        <p className="mt-1 text-muted-foreground">
-          Your projects, boards, AI suggestions, and quick actions
-        </p>
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/8 via-background to-accent/5 p-6 md:p-8 border border-border/60">
+        <div className="relative z-10">
+          <h1 className="text-h2 font-semibold text-foreground md:text-hero md:font-hero">
+            Dashboard
+          </h1>
+          <p className="mt-2 text-muted-foreground max-w-2xl text-base leading-relaxed">
+            Your projects, boards, AI suggestions, and quick actions
+          </p>
+        </div>
       </div>
 
       {hasError && (
         <div
           className={cn(
-            'flex items-center justify-between gap-4 rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3'
+            'flex items-center justify-between gap-4 rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 animate-fade-in'
           )}
           role="alert"
         >
@@ -60,7 +64,7 @@ export default function DashboardPage() {
       <QuickActionsPanel />
 
       <div className="grid gap-8 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 space-y-4">
           <ProjectGridList
             projects={projects}
             isLoading={isLoading}
@@ -68,8 +72,8 @@ export default function DashboardPage() {
             viewAllLabel="View all"
           />
         </div>
-        <div>
-          <h2 className="text-h3 font-semibold mb-4">Recent Activity</h2>
+        <div className="space-y-4 animate-fade-in-up [animation-delay:100ms]">
+          <h2 className="text-h3 font-semibold">Recent Activity</h2>
           <RecentActivityFeed
             items={activity}
             isLoading={isLoading}
