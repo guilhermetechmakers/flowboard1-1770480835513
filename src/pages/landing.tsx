@@ -25,10 +25,10 @@ export function LandingPage() {
             <span className="text-xl font-semibold">FlowBoard</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/login">
+            <Link to="/login-/-signup-page">
               <Button variant="ghost">Log in</Button>
             </Link>
-            <Link to="/signup">
+            <Link to="/login-/-signup-page">
               <Button>Get Started</Button>
             </Link>
           </div>
@@ -48,7 +48,7 @@ export function LandingPage() {
               proposes next steps, and generates content.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-in-up [animation-delay:200ms]">
-              <Link to="/signup">
+              <Link to="/login-/-signup-page">
                 <Button size="lg" className="min-w-[160px]">
                   Get Started
                   <ArrowRight className="h-4 w-4" />
