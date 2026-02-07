@@ -107,3 +107,46 @@ export interface ProjectCardData {
   collaboratorsCount: number
   boardId?: string
 }
+
+export interface BoardVisualCanvas {
+  id: string
+  user_id: string
+  title: string
+  description?: string
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+export interface BoardVersion {
+  id: string
+  boardId: string
+  version: number
+  nodes: BoardNode[]
+  edges: BoardEdge[]
+  createdAt: string
+}
+
+export interface CanvasComment {
+  id: string
+  nodeId: string
+  content: string
+  authorId: string
+  authorName: string
+  createdAt: string
+  replies?: CanvasComment[]
+}
+
+export interface AISuggestion {
+  id: string
+  type: 'action' | 'summary' | 'expand'
+  title: string
+  description: string
+  nodeIds?: string[]
+}
+
+export interface Viewport {
+  x: number
+  y: number
+  zoom: number
+}

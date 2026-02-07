@@ -29,6 +29,19 @@ export function DashboardOverview() {
 
       {/* Quick actions */}
       <div className="grid gap-4 sm:grid-cols-3">
+        <Link to="/board-visual-canvas">
+          <Card className="cursor-pointer transition-all hover:border-primary/30 hover:shadow-card-hover">
+            <CardContent className="flex items-center gap-4 pt-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <LayoutGrid className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <p className="font-medium">Visual Canvas</p>
+                <p className="text-sm text-muted-foreground">Infinite board with AI</p>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
         <Link to="/dashboard/projects/new">
           <Card className="cursor-pointer transition-all hover:border-primary/30">
             <CardContent className="flex items-center gap-4 pt-6">

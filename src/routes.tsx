@@ -17,6 +17,7 @@ import { AdminDashboardPage } from '@/pages/dashboard/admin'
 import { ImportExportPage } from '@/pages/dashboard/import-export'
 import { TransactionsPage } from '@/pages/dashboard/transactions'
 import { BoardPage } from '@/pages/board/board'
+import BoardVisualCanvasPage from '@/pages/board-visual-canvas/BoardVisualCanvasPage'
 import { CheckoutPage } from '@/pages/checkout'
 import { NotFoundPage } from '@/pages/errors/not-found'
 import { ServerErrorPage } from '@/pages/errors/server-error'
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
     ],
   },
   { path: '/board/:boardId', element: <BoardPage /> },
+  { path: '/board-visual-canvas', element: <BoardVisualCanvasPage /> },
+  { path: '/board-visual-canvas/:boardId', element: <BoardVisualCanvasPage /> },
+  { path: '/board-(visual-canvas)', element: <BoardVisualCanvasPage /> },
+  { path: '/board-(visual-canvas)/:boardId', element: <BoardVisualCanvasPage /> },
   { path: '/docs', element: <Navigate to="/about" replace /> },
   { path: '*', element: <NotFoundPage /> },
 ])
